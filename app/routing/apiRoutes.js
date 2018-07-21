@@ -40,14 +40,11 @@ module.exports = function (app) {
     // Adding the user data to the friends array
     friendsData.push(req.body);
 
-    for (var i = 0; i < friendsData.length; i++) {
-      if (chosen === characters[i].routeName) {
-        return res.json(characters[i]);
-      }
-    }
+    // Calling the bestMatch function to get array index of best match
+    var bestMatchIndex = bestMatch(friendsData);
 
     // The response is the friend with the best match
-    res.json(true);
+    res.json(friendsData[bestMatchIndex]);
 
   });
 
@@ -67,25 +64,35 @@ module.exports = function (app) {
 // Best Match Function
 function bestMatch(friendsData) {
   var ansDiffArray = [];
-  var
-  for (var i = 0; i < friendsData.length - 1; i++) {
-    var ansDiff = 0;
-    for (var j = 0; j < friendsData.scores.length; j++) {
-      // the difference between the new friend and the existing friends for each question
-      ansDiff = Math.abs(friendsData[friendsData.length].scores[j] - friendsData[i].scores[j]);
-      ansDiff += ansDiff;
+
+  if (friendsData.length <= 1) {
+    // If new friend is the first to be stored
+    var minIndex = 0;
+
+    return minIndex;
+
+  } else {
+    for (var i = 0; i < friendsData.length - 1; i++) {
+      var ansDiff = 0;
+      for (var j = 0; j < friendsData.scores.length; j++) {
+        // the difference between the new friend and the existing friends for each question
+        ansDiff = Math.abs(friendsData[friendsData.length].scores[j] - friendsData[i].scores[j]);
+        ansDiff += ansDiff;
+      }
+      ansDiffArray[i] = ansDiff;
     }
-    ansDiffArray[i] = ansDiff;
+
+    // Determining the minimum difference between the new friend and the existing friends
+    var smallest = ansDiffArray[0];
+    for (var i = 0; i < ansDiffArray.length - 1; i++) {
+      if (ansDiffArray[i] < smallest) {
+        smallest = ansDiffArray[i];
+      }
+    }
+
+    // Determining the index of the minimum value
+    var minIndex = ansDiffArray.indexOf(smallest);
+
+    return minIndex;
   }
 }
-
-// Determining the minimum difference between the new friend and the existing friends
-var smallest = ansDiffArray[0];
-for (var i = 0; i < ansDiffArray.length -1; i++) {
-  if (ansDiffArray[i] < smallest) {
-    smallest = ansDiffArray[i];
-  }
-}
-
-// Determining the index of the minimum value
-var minIndex = ansDiffArray.indexOf(smallest);

@@ -7,8 +7,8 @@
 
 var FriendsArray = [
   {
-    "name": "Ahmed",
-    "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "name": "Emma",
+    "photo": "https://www.pexels.com/photo/women-s-white-and-black-button-up-collared-shirt-774909/",
     "scores": [
       5,
       1,
@@ -21,7 +21,40 @@ var FriendsArray = [
       4,
       1
     ]
+  },
+  {
+    "name": "Monica",
+    "photo": "https://www.pexels.com/photo/brown-haired-woman-wearing-brown-blazer-focus-photo-712521/",
+    "scores": [
+      4,
+      3,
+      2,
+      1,
+      5,
+      1,
+      2,
+      5,
+      3,
+      1
+    ]
+  },
+  {
+    "name": "Ahmed",
+    "photo": "https://www.pexels.com/photo/man-young-happy-smiling-91227/",
+    "scores": [
+      4,
+      3,
+      2,
+      1,
+      5,
+      1,
+      2,
+      5,
+      3,
+      2
+    ]
   }
+
 ];
 
 // Note how we export the array. This makes it accessible to other files using require.

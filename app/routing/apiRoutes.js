@@ -69,7 +69,7 @@ module.exports = function (app) {
 // Best Match Function
 function bestMatch(friendsData) {
 
-  console.log("Inside friendsData: " + JSON.stringify(friendsData));
+  //console.log("Inside friendsData: " + JSON.stringify(friendsData));
 
 
 
@@ -89,22 +89,27 @@ function bestMatch(friendsData) {
         // the difference between the new friend and the existing friends for each question
         ansDiffCurrent = Math.abs(friendsData[friendsData.length - 1].scores[j] - friendsData[i].scores[j]);
         ansDiff += ansDiffCurrent;
-        console.log("ansDiff: " + ansDiff + " newFriendChoice: " + friendsData[friendsData.length - 1].scores[j] + " extistFriendChoice: " + friendsData[i].scores[j])
+        //console.log("ansDiff: " + ansDiff + " newFriendChoice: " + friendsData[friendsData.length - 1].scores[j] + " extistFriendChoice: " + friendsData[i].scores[j])
       }
       ansDiffArray[i] = ansDiff;
+      //console.log("i: " + i + " ansDiffArray[i]: " + ansDiffArray[i]);
     }
+
+    //console.log("ansDiffArray.length: " + ansDiffArray.length);
 
     // Determining the minimum difference between the new friend and the existing friends
     var smallest = ansDiffArray[0];
-    for (var i = 0; i < ansDiffArray.length - 1; i++) {
+    for (var i = 0; i < ansDiffArray.length; i++) {
       if (ansDiffArray[i] < smallest) {
         smallest = ansDiffArray[i];
       }
     }
 
+    //console.log("smallest: " + smallest);
+
     // Determining the index of the minimum value
     var minIndex = ansDiffArray.indexOf(smallest);
-
+    //console.log("minIndex: " + minIndex);
     return minIndex;
   }
 }

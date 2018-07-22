@@ -40,6 +40,11 @@ module.exports = function (app) {
     // Adding the user data to the friends array
     friendsData.push(req.body);
 
+
+    //   console.log("Outside friendsData: " + JSON.stringify(friendsData));
+    //console.log("friendsData.length: " + friendsData.length);
+    //console.log("friendsData[0].scores[0]: " + friendsData[0].scores[0]);
+
     // Calling the bestMatch function to get array index of best match
     var bestMatchIndex = bestMatch(friendsData);
 
@@ -63,6 +68,11 @@ module.exports = function (app) {
 // ---------------------------------------------------------------------------
 // Best Match Function
 function bestMatch(friendsData) {
+
+  console.log("Inside friendsData: " + JSON.stringify(friendsData));
+
+
+
   var ansDiffArray = [];
 
   if (friendsData.length <= 1) {
@@ -74,10 +84,12 @@ function bestMatch(friendsData) {
   } else {
     for (var i = 0; i < friendsData.length - 1; i++) {
       var ansDiff = 0;
-      for (var j = 0; j < friendsData.scores.length; j++) {
+      for (var j = 0; j < friendsData[0].scores.length; j++) {
+
         // the difference between the new friend and the existing friends for each question
-        ansDiff = Math.abs(friendsData[friendsData.length].scores[j] - friendsData[i].scores[j]);
-        ansDiff += ansDiff;
+        ansDiffCurrent = Math.abs(friendsData[friendsData.length - 1].scores[j] - friendsData[i].scores[j]);
+        ansDiff += ansDiffCurrent;
+        console.log("ansDiff: " + ansDiff + " newFriendChoice: " + friendsData[friendsData.length - 1].scores[j] + " extistFriendChoice: " + friendsData[i].scores[j])
       }
       ansDiffArray[i] = ansDiff;
     }

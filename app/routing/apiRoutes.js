@@ -109,6 +109,7 @@ function bestMatch(friendsData) {
 
     // Determining the index of the minimum value
     var minIndex = ansDiffArray.indexOf(smallest);
+    
     //console.log("minIndex: " + minIndex);
     return minIndex;
   }
